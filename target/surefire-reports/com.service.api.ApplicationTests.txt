@@ -1,0 +1,7 @@
+-------------------------------------------------------------------------------
+Test set: com.service.api.ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.377 s <<< FAILURE! - in com.service.api.ApplicationTests
+com.service.api.ApplicationTests  Time elapsed: 0.374 s  <<< ERROR!
+java.lang.IllegalStateException: Found multiple @SpringBootConfiguration annotated classes [Generic bean: class [com.service.api.Application]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in file [C:\Users\night\mfec\car_store_api\target\classes\com\service\api\Application.class], Generic bean: class [com.service.api.CarStoreApplication]; scope=; abstract=false; lazyInit=null; autowireMode=0; dependencyCheck=0; autowireCandidate=true; primary=false; factoryBeanName=null; factoryMethodName=null; initMethodName=null; destroyMethodName=null; defined in file [C:\Users\night\mfec\car_store_api\target\classes\com\service\api\CarStoreApplication.class]]
+
