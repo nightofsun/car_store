@@ -23,10 +23,11 @@ public class LogActionDaoImpl implements LogActionDao {
     private final String UPDATE_AT = "update_at";
     private final String IS_DELETE = "is_delete";
 
+    private final String ID = "id";
     private final String CAR_ID = "car_id";
     private final String ACTION_TYPE = "action_type";
-    private final String BEFORE = "before";
-    private final String AFTER = "after";
+    private final String BEFORE = "before_action";
+    private final String AFTER = "after_action";
 
     @Override
     public void insert(List<LogAction> insertObjectList) throws Exception {
@@ -38,6 +39,7 @@ public class LogActionDaoImpl implements LogActionDao {
                     .append(CREATE_AT).append(DatabaseConstant.SIGN_COMMA)
                     .append(IS_DELETE).append(DatabaseConstant.SIGN_COMMA);
             sql
+                    .append(ID).append(DatabaseConstant.SIGN_COMMA)
                     .append(CAR_ID).append(DatabaseConstant.SIGN_COMMA)
                     .append(ACTION_TYPE).append(DatabaseConstant.SIGN_COMMA)
                     .append(BEFORE).append(DatabaseConstant.SIGN_COMMA)
@@ -56,6 +58,7 @@ public class LogActionDaoImpl implements LogActionDao {
                             .append(DatabaseConstant.SIGN_QESTION_MARK).append(DatabaseConstant.SIGN_COMMA)
                             .append(DatabaseConstant.SIGN_QESTION_MARK).append(DatabaseConstant.SIGN_COMMA)
                             .append(DatabaseConstant.SIGN_QESTION_MARK).append(DatabaseConstant.SIGN_COMMA)
+                            .append(DatabaseConstant.SIGN_QESTION_MARK).append(DatabaseConstant.SIGN_COMMA)
                             .append(DatabaseConstant.SIGN_QESTION_MARK)
                             .append(DatabaseConstant.CLOSE_BRACKET);
                     if (i < size - 1) {
@@ -63,8 +66,10 @@ public class LogActionDaoImpl implements LogActionDao {
                     }
 
                     //setup object statement
+
                     parameter.add(insertObj.getCreateAt());
                     parameter.add(insertObj.getIsDelete());
+                    parameter.add(insertObj.getId());
                     parameter.add(insertObj.getCarId());
                     parameter.add(insertObj.getActionType());
                     parameter.add(insertObj.getBefore());
