@@ -1,7 +1,7 @@
 package com.service.api.domain;
 
 public class Car extends BaseDomain{
-    private String id;
+    private String carID;
     private String brand;
     private String name;
     private String driveSystem;
@@ -12,12 +12,12 @@ public class Car extends BaseDomain{
     private String carType;
     private String oilType;
 
-    public String getId() {
-        return id;
+    public String getCarID() {
+        return carID;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setCarID(String carID) {
+        this.carID = carID;
     }
 
     public String getBrand() {
@@ -95,7 +95,7 @@ public class Car extends BaseDomain{
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Car{id=").append(id);
+        sb.append("Car{id=").append(carID);
         sb.append(", brand=").append(brand);
         sb.append(", name=").append(name);
         sb.append(", driveSystem=").append(driveSystem);
