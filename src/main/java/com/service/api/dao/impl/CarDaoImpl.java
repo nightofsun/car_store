@@ -1,7 +1,7 @@
 package com.service.api.dao.impl;
 
 import com.service.api.constant.DatabaseConstant;
-import com.service.api.constant.Constant;
+import com.service.api.constant.CommonConstant;
 import com.service.api.dao.CarDao;
 import com.service.api.domain.Car;
 import com.service.api.util.StringUtils;
@@ -186,8 +186,8 @@ public class CarDaoImpl implements CarDao {
                         .append(DatabaseConstant.LIMIT_QUESTION_MARK)
                         .append(DatabaseConstant.SIGN_COMMA)
                         .append(DatabaseConstant.SIGN_QESTION_MARK);
-                parameters.add((page-1)*Constant.PAGE_SIZE);
-                parameters.add(page*Constant.PAGE_SIZE);
+                parameters.add((page-1)* CommonConstant.PAGE_SIZE);
+                parameters.add(page* CommonConstant.PAGE_SIZE);
             }
             resultList = jdbcTemplate.query(sql.toString(), parameters.toArray(), ROW_MAPPER);
         }
@@ -448,8 +448,8 @@ public class CarDaoImpl implements CarDao {
                         .append(DatabaseConstant.LIMIT_QUESTION_MARK)
                         .append(DatabaseConstant.SIGN_COMMA)
                         .append(DatabaseConstant.SIGN_QESTION_MARK);
-                parameters.add((page-1)*Constant.PAGE_SIZE);
-                parameters.add(page*Constant.PAGE_SIZE);
+                parameters.add((page-1)* CommonConstant.PAGE_SIZE);
+                parameters.add(page* CommonConstant.PAGE_SIZE);
             }
             result = jdbcTemplate.queryForObject(sql.toString(),parameters.toArray(), Integer.class);
         }
