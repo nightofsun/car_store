@@ -35,8 +35,8 @@ public class BaseRequest {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("BaseRequest{requestUR=").append(requestURI);
-        sb.append(", requestDate").append(requestDate);
-        sb.append(", bodyData").append(bodyData);
+        sb.append(", requestDate=").append(requestDate);
+        sb.append(", bodyData=").append(bodyData);
         sb.append("}");
         return sb.toString();
     }
