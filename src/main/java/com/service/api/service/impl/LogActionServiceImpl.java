@@ -18,7 +18,7 @@ import java.util.UUID;
 @Service
 public class LogActionServiceImpl implements LogActionService {
     @Autowired
-    LogActionDao logActionDao;
+    private LogActionDao logActionDao;
     @Override
     public void createNewCarLog(String carID, String carAttribute) throws Exception {
         Date currentDate = new Date();

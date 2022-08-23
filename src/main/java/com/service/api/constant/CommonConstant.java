@@ -14,4 +14,10 @@ public class CommonConstant {
     public static final String ACTION_TYPE_CREATE = "create";
     public static final String ACTION_TYPE_UPDATE = "update";
     public static final String ACTION_TYPE_DELETE = "delete";
+    public static final String RESPONSE_SUCCESS = "success";
+    public static final String RESPONSE_MESSAGE_SUCCESS = "request success";
+    public static final String RESPONSE_CODE_SUCCESS = "200000";
+    public static final String RESPONSE_FAIL = "fail";
+    public static final String RESPONSE_MESSAGE_FAIL = "request fail";
+    public static final String RESPONSE_CODE_FAIL = "500000";
 }

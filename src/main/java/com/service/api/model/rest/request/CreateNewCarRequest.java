@@ -5,9 +5,9 @@ public class CreateNewCarRequest {
     private String name;
     private String driveSystem;
     private String gearType;
-    private Integer year;
+    private String year;
     private String engine;
-    private Integer price;
+    private String price;
     private String carType;
     private String oilType;
 
@@ -43,11 +43,11 @@ public class CreateNewCarRequest {
         this.gearType = gearType;
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -59,11 +59,11 @@ public class CreateNewCarRequest {
         this.engine = engine;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 

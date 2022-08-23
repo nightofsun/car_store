@@ -1,7 +1,7 @@
 package com.service.api.model.rest.response;
 
 public class CarAttribute {
-    private String carId;
+    private String carID;
     private String brand;
     private String name;
     private String driveSystem;
@@ -12,12 +12,12 @@ public class CarAttribute {
     private String carType;
     private String oilType;
 
-    public String getCarId() {
-        return carId;
+    public String getCarID() {
+        return carID;
     }
 
     public void setCarId(String carId) {
-        this.carId = carId;
+        this.carID = carId;
     }
 
     public String getBrand() {
@@ -95,7 +95,7 @@ public class CarAttribute {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("CarAttribute{carId=").append(carId);
+        sb.append("CarAttribute{carId=").append(carID);
         sb.append(", brand=").append(brand);
         sb.append(", name=").append(name);
         sb.append(", driveSystem=").append(driveSystem);

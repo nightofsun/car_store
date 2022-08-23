@@ -1,23 +1,23 @@
 package com.service.api.model.rest.request;
 
 public class UpdateCarRequest {
-    private String carId;
+    private String carID;
     private String brand;
     private String name;
     private String driveSystem;
     private String gearType;
-    private Integer year;
+    private String year;
     private String engine;
-    private Integer price;
+    private String price;
     private String carType;
     private String oilType;
 
-    public String getCarId() {
-        return carId;
+    public String getCarID() {
+        return carID;
     }
 
-    public void setCarId(String carId) {
-        this.carId = carId;
+    public void setCarID(String carId) {
+        this.carID = carId;
     }
 
     public String getBrand() {
@@ -52,11 +52,11 @@ public class UpdateCarRequest {
         this.gearType = gearType;
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(Integer year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -68,11 +68,11 @@ public class UpdateCarRequest {
         this.engine = engine;
     }
 
-    public Integer getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
@@ -95,7 +95,7 @@ public class UpdateCarRequest {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("CreateNewCarRequest{carId=").append(carId);
+        sb.append("CreateNewCarRequest{carId=").append(carID);
         sb.append(", brand=").append(brand);
         sb.append(", name=").append(name);
         sb.append(", driveSystem=").append(driveSystem);

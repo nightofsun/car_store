@@ -5,10 +5,10 @@ public class GetCarListRequest {
     private String gearType;
     private String carType;
     private String brand;
-    private Integer minPrice;
-    private Integer maxPrice;
-    private Integer sortType;
-    private Integer page;
+    private String minPrice;
+    private String maxPrice;
+    private String sortType;
+    private String page;
 
     public String getName() {
         return name;
@@ -42,35 +42,35 @@ public class GetCarListRequest {
         this.brand = brand;
     }
 
-    public Integer getMinPrice() {
+    public String getMinPrice() {
         return minPrice;
     }
 
-    public void setMinPrice(Integer minPrice) {
+    public void setMinPrice(String minPrice) {
         this.minPrice = minPrice;
     }
 
-    public Integer getMaxPrice() {
+    public String getMaxPrice() {
         return maxPrice;
     }
 
-    public void setMaxPrice(Integer maxPrice) {
+    public void setMaxPrice(String maxPrice) {
         this.maxPrice = maxPrice;
     }
 
-    public Integer getSortType() {
+    public String getSortType() {
         return sortType;
     }
 
-    public void setSortType(Integer sortType) {
+    public void setSortType(String sortType) {
         this.sortType = sortType;
     }
 
-    public Integer getPage() {
+    public String getPage() {
         return page;
     }
 
-    public void setPage(Integer page) {
+    public void setPage(String page) {
         this.page = page;
     }
 

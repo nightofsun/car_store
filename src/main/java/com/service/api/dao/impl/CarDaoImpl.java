@@ -60,7 +60,44 @@ public class CarDaoImpl implements CarDao {
     };
 
     @Override
-    public List<Car> find(Car findObject, Integer minPrice, Integer maxPrice, Integer sortType, Integer page) throws Exception {
+    public Car findById(String carId) throws Exception {
+        StringBuilder sql = new StringBuilder();
+        List<Car> result = new ArrayList<>();
+        List<Object> parameters = new ArrayList<>();
+        try {
+            sql.append(DatabaseConstant.SELECT_STAR_FROM).append(TABLE);
+            sql.append(DatabaseConstant.WHERE_0_EQUAL_0);
+            sql
+                    .append(DatabaseConstant.AND)
+                    .append(IS_DELETE)
+                    .append(DatabaseConstant.EQUAL_QUESTION_MARK);
+            parameters.add(CommonConstant.FLAG_NO);
+            if (StringUtils.isNotEmtyOrNull(carId)){
+                sql
+                        .append(DatabaseConstant.AND)
+                        .append(CAR_ID)
+                        .append(DatabaseConstant.EQUAL_QUESTION_MARK);
+                parameters.add(carId);
+            }
+            else {
+                return null;
+            }
+            result = jdbcTemplate.query(sql.toString(),parameters.toArray(),ROW_MAPPER);
+            if (result!=null && result.size()>0){
+                return result.get(0);
+            }
+        }
+        catch (DataAccessException e){
+            throw e;
+        }
+        catch (Exception e){
+            throw e;
+        }
+        return null;
+    }
+
+    @Override
+    public List<Car> find(Car findObject, String minPrice, String maxPrice, String sortType, Integer page) throws Exception {
         StringBuilder sql = new StringBuilder();
         List<Car> resultList = new ArrayList<>();
         List<Object> parameters = new ArrayList<>();
@@ -163,23 +200,23 @@ public class CarDaoImpl implements CarDao {
                     parameters.add(findObject.getOilType());
                 }
             }
-            if (minPrice!=null){
+            if (StringUtils.isNotEmtyOrNull(minPrice)){
                 sql
                         .append(DatabaseConstant.AND)
                         .append(PRICE)
                         .append(DatabaseConstant.OVER_EQUAL_QUESTION_MARK);
                 parameters.add(minPrice);
             }
-            if (maxPrice!=null){
+            if (StringUtils.isNotEmtyOrNull(maxPrice)){
                 sql
                         .append(DatabaseConstant.AND)
                         .append(PRICE)
                         .append(DatabaseConstant.LESS_EQUAL_QUESTION_MARK);
                 parameters.add(maxPrice);
             }
-            if (sortType!=null&&sortType>=0&&sortType<SORT_TYPE.length) {
+            if (StringUtils.isNotEmtyOrNull(sortType)&&Integer.parseInt(sortType)<SORT_TYPE.length) {
                 sql
-                        .append(SORT_TYPE[sortType]);
+                        .append(SORT_TYPE[Integer.parseInt(sortType)]);
             }
             if (page!=null&&page>0){
                 sql
@@ -220,7 +257,7 @@ public class CarDaoImpl implements CarDao {
                     .append(ENGINE).append(DatabaseConstant.SIGN_COMMA)
                     .append(PRICE).append(DatabaseConstant.SIGN_COMMA)
                     .append(CAR_TYPE).append(DatabaseConstant.SIGN_COMMA)
-                    .append(OIL_TYPE).append(DatabaseConstant.SIGN_COMMA)
+                    .append(OIL_TYPE)
                     .append(DatabaseConstant.CLOSE_BRACKET);
             if (insertObjectList!=null && insertObjectList.size()>0) {
                 int size = insertObjectList.size();
@@ -322,7 +359,7 @@ public class CarDaoImpl implements CarDao {
     }
 
     @Override
-    public Integer getCount(Car findObject, Integer minPrice, Integer maxPrice, Integer sortType, Integer page) throws Exception {
+    public Integer getCount(Car findObject, String minPrice, String maxPrice) throws Exception {
         StringBuilder sql = new StringBuilder();
         Integer result = null;
         List<Object> parameters = new ArrayList<>();
@@ -425,31 +462,19 @@ public class CarDaoImpl implements CarDao {
                     parameters.add(findObject.getOilType());
                 }
             }
-            if (minPrice!=null){
+            if (StringUtils.isNotEmtyOrNull(minPrice)){
                 sql
                         .append(DatabaseConstant.AND)
                         .append(PRICE)
                         .append(DatabaseConstant.OVER_EQUAL_QUESTION_MARK);
                 parameters.add(minPrice);
             }
-            if (maxPrice!=null){
+            if (StringUtils.isNotEmtyOrNull(maxPrice)){
                 sql
                         .append(DatabaseConstant.AND)
                         .append(PRICE)
                         .append(DatabaseConstant.LESS_EQUAL_QUESTION_MARK);
                 parameters.add(maxPrice);
-            }
-            if (sortType!=null&&sortType>=0&&sortType<SORT_TYPE.length) {
-                sql
-                        .append(SORT_TYPE[sortType]);
-            }
-            if (page!=null&&page>0){
-                sql
-                        .append(DatabaseConstant.LIMIT_QUESTION_MARK)
-                        .append(DatabaseConstant.SIGN_COMMA)
-                        .append(DatabaseConstant.SIGN_QESTION_MARK);
-                parameters.add((page-1)* CommonConstant.PAGE_SIZE);
-                parameters.add(page* CommonConstant.PAGE_SIZE);
             }
             result = jdbcTemplate.queryForObject(sql.toString(),parameters.toArray(), Integer.class);
         }
