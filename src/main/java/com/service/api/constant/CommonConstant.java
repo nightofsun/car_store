@@ -8,6 +8,9 @@ public class CommonConstant {
     public static final String ACCESS_LOG = "[ACCESS]";
     public static final String SYSTEM_LOG = "[SYSTEM]";
     public static final String LOG_QUERY = "Query";
+    public static final String LOG_EXCEPTION = "Exception";
+    public static final String LOG_LEVEL_INFO = "info";
+    public static final String LOG_LEVEL_WARNING = "warning";
     public static final String LOG_PARAMETER = "Parameter";
     public static final String APPLICATION_REQUEST_DETAIL = "REQUEST_DETAIL";
     public static final String FLAG_YES = "yes";

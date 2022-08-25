@@ -34,7 +34,7 @@ public class LoggerServiceImpl implements LoggerService {
     }
 
     @Override
-    public void systemLogger(String ref, String message, String value) {
+    public void systemLogger(String ref, String message, String value, String level) {
         StringBuilder sb = new StringBuilder();
         sb
                 .append("Ref=[")
@@ -44,6 +44,15 @@ public class LoggerServiceImpl implements LoggerService {
                 .append("], Value=[")
                 .append(value)
                 .append("]");
-        systemLogger.info(sb.toString());
+        String log = sb.toString();
+        if (level == CommonConstant.LOG_LEVEL_INFO){
+            systemLogger.info(log);
+        }
+        else if (level == CommonConstant.LOG_LEVEL_WARNING){
+            systemLogger.warn(log);
+        }
+        else {
+            systemLogger.trace(log);
+        }
     }
 }

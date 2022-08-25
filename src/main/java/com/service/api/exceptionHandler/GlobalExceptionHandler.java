@@ -8,7 +8,9 @@ import com.service.api.exceptions.ServiceException;
 import com.service.api.exceptions.ServiceValidationException;
 import com.service.api.model.rest.BaseRequest;
 import com.service.api.model.rest.BaseResponse;
+import com.service.api.service.LoggerService;
 import com.service.api.util.DateUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,12 +22,15 @@ import java.util.Date;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
+    @Autowired
+    private LoggerService loggerService;
     private BaseResponse generateResponseMessage(Exception e, String message) {
         BaseResponse response = new BaseResponse();
         response.setMessage(message);
         response.setStatus(CommonConstant.RESPONSE_FAIL);
         response.setStatusCode(e.getMessage());
         response.setTimestamp(DateUtils.formatDateToString(new Date(), DateTimeConstant.APPLICATION_DATE_FORMAT));
+        loggerService.systemLogger(CommonConstant.LOG_EXCEPTION,e.getMessage(),response.toString(),CommonConstant.LOG_LEVEL_WARNING);
         return response;
     }
     @ExceptionHandler(ServiceValidationException.class)

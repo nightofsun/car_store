@@ -84,8 +84,8 @@ public class CarDaoImpl implements CarDao {
             else {
                 return null;
             }
-            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString());
-            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString(),CommonConstant.LOG_LEVEL_INFO);
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString(),CommonConstant.LOG_LEVEL_INFO);
             result = jdbcTemplate.query(sql.toString(),parameters.toArray(),ROW_MAPPER);
             if (result!=null && result.size()>0){
                 return result.get(0);
@@ -230,8 +230,8 @@ public class CarDaoImpl implements CarDao {
                 parameters.add((page-1)* CommonConstant.PAGE_SIZE);
                 parameters.add(CommonConstant.PAGE_SIZE);
             }
-            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString());
-            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString(),CommonConstant.LOG_LEVEL_INFO);
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString(),CommonConstant.LOG_LEVEL_INFO);
             resultList = jdbcTemplate.query(sql.toString(), parameters.toArray(), ROW_MAPPER);
         }
         catch (DataAccessException e){
@@ -305,8 +305,8 @@ public class CarDaoImpl implements CarDao {
                     parameters.add(insertObj.getOilType());
                 }
             }
-            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString());
-            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString(),CommonConstant.LOG_LEVEL_INFO);
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString(),CommonConstant.LOG_LEVEL_INFO);
             jdbcTemplate.update(sql.toString(), parameters.toArray());
         }
         catch (DataAccessException e) {
@@ -356,8 +356,8 @@ public class CarDaoImpl implements CarDao {
                 //update condition value
                 parameters.add(updateObject.getCarID());
             }
-            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString());
-            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString(),CommonConstant.LOG_LEVEL_INFO);
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString(),CommonConstant.LOG_LEVEL_INFO);
             jdbcTemplate.update(sql.toString(), parameters.toArray());
         }
         catch (DataAccessException e) {
@@ -486,8 +486,8 @@ public class CarDaoImpl implements CarDao {
                         .append(DatabaseConstant.LESS_EQUAL_QUESTION_MARK);
                 parameters.add(maxPrice);
             }
-            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString());
-            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString(),CommonConstant.LOG_LEVEL_INFO);
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString(),CommonConstant.LOG_LEVEL_INFO);
             result = jdbcTemplate.queryForObject(sql.toString(),parameters.toArray(), Integer.class);
         }
         catch (DataAccessException e){

@@ -79,8 +79,8 @@ public class LogActionDaoImpl implements LogActionDao {
                     parameters.add(insertObj.getAfter());
                 }
             }
-            loggerService.systemLogger(TABLE, CommonConstant.LOG_QUERY,sql.toString());
-            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString());
+            loggerService.systemLogger(TABLE, CommonConstant.LOG_QUERY,sql.toString(),CommonConstant.LOG_LEVEL_INFO);
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString(),CommonConstant.LOG_LEVEL_INFO);
             jdbcTemplate.update(sql.toString(), parameters.toArray());
         }
         catch (DataAccessException e) {
