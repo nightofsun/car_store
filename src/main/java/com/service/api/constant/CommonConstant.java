@@ -5,9 +5,10 @@ public class CommonConstant {
         throw new IllegalStateException();
     }
     public static final Integer PAGE_SIZE = 10;
-    public static final String ACTION_UPDATE = "update";
-    public static final String ACTION_CREATE = "create";
-    public static final String ACTION_DELETE = "delete";
+    public static final String ACCESS_LOG = "[ACCESS]";
+    public static final String SYSTEM_LOG = "[SYSTEM]";
+    public static final String LOG_QUERY = "Query";
+    public static final String LOG_PARAMETER = "Parameter";
     public static final String APPLICATION_REQUEST_DETAIL = "REQUEST_DETAIL";
     public static final String FLAG_YES = "yes";
     public static final String FLAG_NO = "no";

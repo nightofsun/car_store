@@ -1,9 +1,11 @@
 package com.service.api.dao.impl;
 
+import com.service.api.constant.CommonConstant;
 import com.service.api.constant.DatabaseConstant;
 import com.service.api.dao.LogActionDao;
 import com.service.api.domain.Car;
 import com.service.api.domain.LogAction;
+import com.service.api.service.LoggerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,7 +19,8 @@ public class LogActionDaoImpl implements LogActionDao {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
+    @Autowired
+    private LoggerService loggerService;
     private final String TABLE = "log_action";
     private final String CREATE_AT = "create_at";
     private final String UPDATE_AT = "update_at";
@@ -32,7 +35,7 @@ public class LogActionDaoImpl implements LogActionDao {
     @Override
     public void insert(List<LogAction> insertObjectList) throws Exception {
         StringBuilder sql = new StringBuilder();
-        List<Object> parameter = new ArrayList<>();
+        List<Object> parameters = new ArrayList<>();
         try {
             //setup column
             sql.append(DatabaseConstant.INSERT_INTO).append(TABLE).append(DatabaseConstant.OPEN_BRACKET)
@@ -67,16 +70,18 @@ public class LogActionDaoImpl implements LogActionDao {
 
                     //setup object statement
 
-                    parameter.add(insertObj.getCreateAt());
-                    parameter.add(insertObj.getIsDelete());
-                    parameter.add(insertObj.getId());
-                    parameter.add(insertObj.getCarId());
-                    parameter.add(insertObj.getActionType());
-                    parameter.add(insertObj.getBefore());
-                    parameter.add(insertObj.getAfter());
+                    parameters.add(insertObj.getCreateAt());
+                    parameters.add(insertObj.getIsDelete());
+                    parameters.add(insertObj.getId());
+                    parameters.add(insertObj.getCarId());
+                    parameters.add(insertObj.getActionType());
+                    parameters.add(insertObj.getBefore());
+                    parameters.add(insertObj.getAfter());
                 }
             }
-            jdbcTemplate.update(sql.toString(), parameter.toArray());
+            loggerService.systemLogger(TABLE, CommonConstant.LOG_QUERY,sql.toString());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString());
+            jdbcTemplate.update(sql.toString(), parameters.toArray());
         }
         catch (DataAccessException e) {
             throw e;

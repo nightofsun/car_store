@@ -4,6 +4,7 @@ import com.service.api.constant.DatabaseConstant;
 import com.service.api.constant.CommonConstant;
 import com.service.api.dao.CarDao;
 import com.service.api.domain.Car;
+import com.service.api.service.LoggerService;
 import com.service.api.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -19,7 +20,8 @@ import java.util.List;
 public class CarDaoImpl implements CarDao {
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
+    @Autowired
+    private LoggerService loggerService;
     private final String TABLE = "cars";
     private final String CREATE_AT = "create_at";
     private final String UPDATE_AT = "update_at";
@@ -82,6 +84,8 @@ public class CarDaoImpl implements CarDao {
             else {
                 return null;
             }
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString());
             result = jdbcTemplate.query(sql.toString(),parameters.toArray(),ROW_MAPPER);
             if (result!=null && result.size()>0){
                 return result.get(0);
@@ -226,6 +230,8 @@ public class CarDaoImpl implements CarDao {
                 parameters.add((page-1)* CommonConstant.PAGE_SIZE);
                 parameters.add(CommonConstant.PAGE_SIZE);
             }
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString());
             resultList = jdbcTemplate.query(sql.toString(), parameters.toArray(), ROW_MAPPER);
         }
         catch (DataAccessException e){
@@ -240,7 +246,7 @@ public class CarDaoImpl implements CarDao {
     @Override
     public void insert(List<Car> insertObjectList) throws Exception {
         StringBuilder sql = new StringBuilder();
-        List<Object> parameter = new ArrayList<>();
+        List<Object> parameters = new ArrayList<>();
         try {
             //setup column
             sql
@@ -285,21 +291,23 @@ public class CarDaoImpl implements CarDao {
                     }
 
                     //setup object statement
-                    parameter.add(insertObj.getCreateAt());
-                    parameter.add(insertObj.getIsDelete());
-                    parameter.add(insertObj.getCarID());
-                    parameter.add(insertObj.getBrand());
-                    parameter.add(insertObj.getName());
-                    parameter.add(insertObj.getDriveSystem());
-                    parameter.add(insertObj.getGearType());
-                    parameter.add(insertObj.getYear());
-                    parameter.add(insertObj.getEngine());
-                    parameter.add(insertObj.getPrice());
-                    parameter.add(insertObj.getCarType());
-                    parameter.add(insertObj.getOilType());
+                    parameters.add(insertObj.getCreateAt());
+                    parameters.add(insertObj.getIsDelete());
+                    parameters.add(insertObj.getCarID());
+                    parameters.add(insertObj.getBrand());
+                    parameters.add(insertObj.getName());
+                    parameters.add(insertObj.getDriveSystem());
+                    parameters.add(insertObj.getGearType());
+                    parameters.add(insertObj.getYear());
+                    parameters.add(insertObj.getEngine());
+                    parameters.add(insertObj.getPrice());
+                    parameters.add(insertObj.getCarType());
+                    parameters.add(insertObj.getOilType());
                 }
             }
-            jdbcTemplate.update(sql.toString(), parameter.toArray());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString());
+            jdbcTemplate.update(sql.toString(), parameters.toArray());
         }
         catch (DataAccessException e) {
             throw e;
@@ -312,7 +320,7 @@ public class CarDaoImpl implements CarDao {
     @Override
     public void update(String refID, Car updateObject) throws Exception {
         StringBuilder sql = new StringBuilder();
-        List<Object> parameter = new ArrayList<>();
+        List<Object> parameters = new ArrayList<>();
         try {
             sql.append(DatabaseConstant.UPDATE).append(TABLE).append(DatabaseConstant.SET);
             if (updateObject!=null){
@@ -334,21 +342,23 @@ public class CarDaoImpl implements CarDao {
                 sql
                         .append(DatabaseConstant.WHERE).append(CAR_ID).append(DatabaseConstant.EQUAL_QUESTION_MARK);
                 //update column value
-                parameter.add(updateObject.getUpdateAt());
-                parameter.add(updateObject.getIsDelete());
-                parameter.add(updateObject.getBrand());
-                parameter.add(updateObject.getName());
-                parameter.add(updateObject.getDriveSystem());
-                parameter.add(updateObject.getGearType());
-                parameter.add(updateObject.getYear());
-                parameter.add(updateObject.getEngine());
-                parameter.add(updateObject.getPrice());
-                parameter.add(updateObject.getCarType());
-                parameter.add(updateObject.getOilType());
+                parameters.add(updateObject.getUpdateAt());
+                parameters.add(updateObject.getIsDelete());
+                parameters.add(updateObject.getBrand());
+                parameters.add(updateObject.getName());
+                parameters.add(updateObject.getDriveSystem());
+                parameters.add(updateObject.getGearType());
+                parameters.add(updateObject.getYear());
+                parameters.add(updateObject.getEngine());
+                parameters.add(updateObject.getPrice());
+                parameters.add(updateObject.getCarType());
+                parameters.add(updateObject.getOilType());
                 //update condition value
-                parameter.add(updateObject.getCarID());
+                parameters.add(updateObject.getCarID());
             }
-            jdbcTemplate.update(sql.toString(), parameter.toArray());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString());
+            jdbcTemplate.update(sql.toString(), parameters.toArray());
         }
         catch (DataAccessException e) {
             throw e;
@@ -476,6 +486,8 @@ public class CarDaoImpl implements CarDao {
                         .append(DatabaseConstant.LESS_EQUAL_QUESTION_MARK);
                 parameters.add(maxPrice);
             }
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_QUERY,sql.toString());
+            loggerService.systemLogger(TABLE,CommonConstant.LOG_PARAMETER,parameters.toString());
             result = jdbcTemplate.queryForObject(sql.toString(),parameters.toArray(), Integer.class);
         }
         catch (DataAccessException e){
