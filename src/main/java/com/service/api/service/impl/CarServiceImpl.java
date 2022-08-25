@@ -146,6 +146,7 @@ public class CarServiceImpl implements CarService {
             updateCar.setEngine(request.getEngine());
             updateCar.setCarType(request.getCarType());
             updateCar.setOilType(request.getOilType());
+            updateCar.setUpdateAt(new Date());
             if (StringUtils.isNotEmtyOrNull(request.getYear())) {
                 updateCar.setYear(Integer.parseInt(request.getYear()));
             }
