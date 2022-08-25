@@ -8,4 +8,5 @@ public class ServiceNameConstant {
     public static final String SERVICE_CREATE_NEW_CAR = "/createNewCar";
     public static final String SERVICE_UPDATE_CAR = "/updateCar";
     public static final String SERVICE_DELETE_CAR = "/deleteCar";
+    public static final String SERVICE_CROSS_ORIGIN = "http://localhost:3000";
 }

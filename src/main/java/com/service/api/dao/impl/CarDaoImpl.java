@@ -224,7 +224,7 @@ public class CarDaoImpl implements CarDao {
                         .append(DatabaseConstant.SIGN_COMMA)
                         .append(DatabaseConstant.SIGN_QESTION_MARK);
                 parameters.add((page-1)* CommonConstant.PAGE_SIZE);
-                parameters.add(page* CommonConstant.PAGE_SIZE);
+                parameters.add(CommonConstant.PAGE_SIZE);
             }
             resultList = jdbcTemplate.query(sql.toString(), parameters.toArray(), ROW_MAPPER);
         }

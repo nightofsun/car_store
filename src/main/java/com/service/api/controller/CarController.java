@@ -14,13 +14,11 @@ import com.service.api.model.rest.response.UpdateCarResponse;
 import com.service.api.service.CarService;
 import com.service.api.util.JSONUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
+@CrossOrigin(ServiceNameConstant.SERVICE_CROSS_ORIGIN)
 public class CarController extends CarControllerValidator{
     @Autowired
     private CarService carService;
